@@ -26,3 +26,6 @@ bun-debug.log*
 
 # Local-only overrides (anything matching *.local.* is never committed)
 *.local.*
+
+# Playwright/MCP browser snapshots
+.playwright-mcp/
