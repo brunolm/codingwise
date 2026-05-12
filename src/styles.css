@@ -353,6 +353,71 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   .card-wide { grid-column: span 2; }
 }
 
+/* "New" badge — same shape as featured/pending, in a yellow palette. */
+.card-new {
+  position: relative;
+  border-color: #fbbf24;
+  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.25);
+}
+.card-new::before {
+  content: "New";
+  position: absolute;
+  top: -0.55rem;
+  right: 0.75rem;
+  background: #fbbf24;
+  color: #0b1020;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  line-height: 1.2;
+}
+@media (prefers-color-scheme: light) {
+  .card-new {
+    border-color: #a16207;
+    box-shadow: 0 0 0 1px rgba(161, 98, 7, 0.2);
+  }
+  .card-new::before {
+    background: #a16207;
+    color: #fff;
+  }
+}
+
+/* A highlighted/featured card — brand-colored border + corner badge,
+   structurally identical to .card-pending but in the brand palette. */
+.card-featured {
+  position: relative;
+  border-color: var(--brand-300);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-300) 25%, transparent);
+}
+.card-featured::before {
+  content: "Featured";
+  position: absolute;
+  top: -0.55rem;
+  right: 0.75rem;
+  background: var(--brand-300);
+  color: #0b1020;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  line-height: 1.2;
+}
+@media (prefers-color-scheme: light) {
+  .card-featured {
+    border-color: var(--brand-700);
+    box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-700) 20%, transparent);
+  }
+  .card-featured::before {
+    background: var(--brand-700);
+    color: #fff;
+  }
+}
+
 .card-section-label {
   margin: 1rem 0 0.4rem !important;
   font-family: var(--font-mono);

@@ -70,20 +70,9 @@
       </section>
 
       <section id="work" class="section" aria-labelledby="work-title">
-        <h2 id="work-title">Selected work</h2>
+        <h2 id="work-title">Client work</h2>
         <ul class="cards cards-work" role="list">
-          <li class="card">
-            <p class="card-meta">2026 — present · side project</p>
-            <h3>
-              <a href="https://hibikicodex.com/" rel="noopener noreferrer" target="_blank">Hibiki Codex ↗</a>
-            </h3>
-            <p>
-              Windows desktop app that captures system audio, transcribes
-              locally with whisper.cpp, and lets you query Claude or Codex
-              about what was just said.
-            </p>
-          </li>
-          <li class="card">
+          <li class="card card-featured">
             <p class="card-meta">2026 — present</p>
             <h3>Privacy tool</h3>
             <p>
@@ -182,54 +171,269 @@
               tool.
             </p>
           </li>
-          <li class="card card-wide">
-            <p class="card-meta">2007 – 2018</p>
-            <h3>Earlier projects</h3>
+        </ul>
+      </section>
+
+      <section id="side-projects" class="section" aria-labelledby="side-projects-title">
+        <h2 id="side-projects-title">Side projects</h2>
+        <ul class="cards cards-work" role="list">
+          <li class="card card-new">
+            <h3>
+              <a href="https://hibikicodex.com/" rel="noopener noreferrer" target="_blank">Hibiki Codex ↗</a>
+            </h3>
             <p>
-              A long tail of browser extensions, open-source tools, and
-              developer-experience experiments built on the side.
+              Windows desktop app that captures system audio, transcribes
+              locally with whisper.cpp, and lets you query Claude or Codex
+              about what was just said.
             </p>
-            <ul class="card-list" role="list">
-              <li>
-                <strong>Orkut Manager</strong>
-                <span class="card-list-meta">2007 – 2014</span>
-                — Greasemonkey script that grew into a Firefox extension and
-                reached millions of users on Orkut (community of ~150k).
-                Invited to Google's office twice — once to talk about the
-                extension, once to consult on Orkut's redesign. Featured on
-                Baixaki, magazines, and other sites. Bundled and shipped with
-                CSSourcerer / JSSourcerer below.
-              </li>
-              <li>
-                <strong>CSSourcerer &amp; JSSourcerer</strong>
-                <span class="card-list-meta">internal</span>
-                — CSS and JavaScript bundling and minification helpers, built
-                originally to package Orkut Manager into a single distributable.
-              </li>
-              <li>
-                <strong>
-                  <a href="http://visualstudiogallery.msdn.microsoft.com/34b2cc77-971a-4226-8f93-54518a7917ae" rel="noopener noreferrer" target="_blank">Visual Studio extension for TypeScript unit tests ↗</a>
-                </strong>
-                <span class="card-list-meta">2013</span>
-                — Added unit-test discovery and running for TypeScript files
-                inside Visual Studio.
-                <a href="https://twitter.com/mkristensen/status/357904527262887936" rel="noopener noreferrer" target="_blank">Mads Kristensen called it "sweet" ↗</a>.
-              </li>
-              <li>
-                <strong>
-                  <a href="https://github.com/brunolm/TSLinq" rel="noopener noreferrer" target="_blank">TSLinq ↗</a>
-                </strong>
-                <span class="card-list-meta">2017</span>
-                — LINQ-style query operators for TypeScript collections.
-              </li>
-              <li>
-                <strong>
-                  <a href="https://github.com/brunolm/trellal" rel="noopener noreferrer" target="_blank">Trellal ↗</a>
-                </strong>
-                <span class="card-list-meta">2017 – 2018</span>
-                — Single-pane view of every board across a Trello organization.
-              </li>
-            </ul>
+          </li>
+          <li class="card card-wide card-featured">
+            <h3>Orkut Manager</h3>
+            <p>
+              <strong>Invited to Google's offices twice because of this
+              project</strong> — once to talk about the extension itself,
+              once to consult on Orkut's redesign.
+            </p>
+            <p>
+              A Greasemonkey script that grew into a Firefox extension and
+              reached millions of users on Orkut (community of ~150k).
+              Featured on Baixaki, magazines, and other sites. Bundled and
+              shipped with CSSourcerer / JSSourcerer.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/slack-genos" rel="noopener noreferrer" target="_blank">Slack Genos ↗</a>
+            </h3>
+            <p>
+              Slack bot with an anime Class-S-hero persona that listens to
+              channel events and reacts in character — an early experiment
+              in chatbot personality.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/command-palette-extension-claude" rel="noopener noreferrer" target="_blank">Claude for PowerToys Command Palette ↗</a>
+            </h3>
+            <p>
+              C# extension for the PowerToys Command Palette that runs
+              <code>claude -p "&lt;prompt&gt;"</code> and renders the response
+              inline as Markdown — Claude one keystroke away from anywhere
+              on Windows.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/get-short-video" rel="noopener noreferrer" target="_blank">Get Short Video ↗</a>
+            </h3>
+            <p>
+              Nullstack app for assembling short-form videos — clips,
+              captions, and timing wired together from a simple UI.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/mal-mcp" rel="noopener noreferrer" target="_blank">MAL MCP ↗</a>
+            </h3>
+            <p>
+              Model Context Protocol server exposing the MyAnimeList v2 API
+              to Claude and other MCP clients — runs locally over stdio
+              with Bun or deploys to Cloudflare Workers as a hosted
+              multi-user server with MCP OAuth.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/flow-launcher-plugin-claude" rel="noopener noreferrer" target="_blank">Flow Launcher Claude plugin ↗</a>
+            </h3>
+            <p>
+              Flow Launcher plugin that invokes the Claude Code CLI from a
+              keystroke, copies the answer to the clipboard, and shows a
+              preview toast.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/new-tab" rel="noopener noreferrer" target="_blank">New Tab ↗</a>
+            </h3>
+            <p>
+              Minimal dark-mode Chromium new-tab page — multi-engine search
+              that fans a query out to Google, Bing, and DuckDuckGo
+              simultaneously, plus a configurable shortcut grid and IP
+              lookup.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/ff7rebirth" rel="noopener noreferrer" target="_blank">FF7 Rebirth AHK utils ↗</a>
+            </h3>
+            <p>
+              AutoHotkey scripts for Final Fantasy VII Rebirth — including
+              an automated in-game piano player driven by sheet files.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/gbfr-ahk-scripts" rel="noopener noreferrer" target="_blank">Granblue Fantasy Relink AHK scripts ↗</a>
+            </h3>
+            <p>
+              QoL AutoHotkey scripts for Granblue Fantasy: Relink —
+              sell-all macros, weapon transmarvel helpers, turbo-click
+              automation.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://www.npmjs.com/package/object-casing" rel="noopener noreferrer" target="_blank">Object Casing ↗</a>
+            </h3>
+            <p>
+              Published npm package that walks an object and rewrites its
+              keys through a callback — useful when crossing API
+              boundaries between snake_case and camelCase systems.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://www.npmjs.com/package/knex-tenanty" rel="noopener noreferrer" target="_blank">Knex Tenanty ↗</a>
+            </h3>
+            <p>
+              Multi-tenant middleware for Knex — one application instance
+              serves multiple clients with their data isolated into
+              separate database schemas. Published to npm.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/export-index" rel="noopener noreferrer" target="_blank">Export Index ↗</a>
+            </h3>
+            <p>
+              VS Code extension that generates a barrel <code>index</code>
+              file by emitting an <code>export</code> statement for every
+              sibling file — one command instead of hand-maintained
+              re-export lists.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://www.npmjs.com/package/mirror-keys" rel="noopener noreferrer" target="_blank">Mirror Keys ↗</a>
+            </h3>
+            <p>
+              Tiny npm utility that copies an object's keys over to its
+              values — useful for building enum-like constant maps from a
+              single source of truth.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="http://visualstudiogallery.msdn.microsoft.com/34b2cc77-971a-4226-8f93-54518a7917ae" rel="noopener noreferrer" target="_blank">Visual Studio extension for TypeScript unit tests ↗</a>
+            </h3>
+            <p>
+              Added unit-test discovery and running for TypeScript files
+              inside Visual Studio.
+              <a href="https://twitter.com/mkristensen/status/357904527262887936" rel="noopener noreferrer" target="_blank">Mads Kristensen called it "sweet" ↗</a>.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/TSLinq" rel="noopener noreferrer" target="_blank">TSLinq ↗</a>
+            </h3>
+            <p>
+              LINQ-style query operators for TypeScript collections.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/trellal" rel="noopener noreferrer" target="_blank">Trellal ↗</a>
+            </h3>
+            <p>
+              Single-pane view of every board across a Trello organization.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/Trellu" rel="noopener noreferrer" target="_blank">Trellu ↗</a>
+            </h3>
+            <p>
+              Local-first TypeScript task and time tracker — to-do lists
+              stored encrypted on your own machine, no cloud.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/lextractor" rel="noopener noreferrer" target="_blank">lextractor ↗</a>
+            </h3>
+            <p>
+              Browser tool that scrapes a LinkedIn profile and drops the
+              structured info into a Trello card — built as a sourcing aid
+              during the consultancy hiring program.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/PSDMapper" rel="noopener noreferrer" target="_blank">PSDMapper ↗</a>
+            </h3>
+            <p>
+              Tool that walks a PSD file's layers and generates a CSS icon
+              sprite plus class names — the kind of glue that used to sit
+              between a designer's PSD and the front-end pipeline.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/codersrank-analyzer" rel="noopener noreferrer" target="_blank">CodersRank analyzer ↗</a>
+            </h3>
+            <p>
+              Generator for CodersRank analysis files — pulls signals out
+              of a repo and outputs the JSON CodersRank ingests for
+              developer profile scoring.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/NumLock" rel="noopener noreferrer" target="_blank">NumLock ↗</a>
+            </h3>
+            <p>
+              Tiny windowless Windows app that re-enables NumLock at boot —
+              fixes the perennial Windows annoyance of NumLock turning itself
+              off on every login.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/nvm" rel="noopener noreferrer" target="_blank">nvm for Windows ↗</a>
+            </h3>
+            <p>
+              A PowerShell-based Node version manager for Windows, written
+              before the ecosystem standardized on the now-canonical
+              nvm-windows. Archived.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/workflowy-wf" rel="noopener noreferrer" target="_blank">Workflowy WF ↗</a>
+            </h3>
+            <p>
+              Flow Launcher plugin for Workflowy — search and jump straight
+              to any node in your outline from the Windows launcher.
+              Archived.
+            </p>
+          </li>
+          <li class="card">
+            <h3>CSSourcerer &amp; JSSourcerer</h3>
+            <p>
+              CSS and JavaScript bundling and minification helpers, built
+              originally to package Orkut Manager into a single distributable.
+            </p>
+          </li>
+          <li class="card">
+            <h3>
+              <a href="https://github.com/brunolm/WindowsPathEditor" rel="noopener noreferrer" target="_blank">Windows Path Editor ↗</a>
+            </h3>
+            <p>
+              Edits the Windows <code>PATH</code> environment variable
+              safely — sorts entries, removes duplicates, and writes a
+              <code>.bak</code> file before every change.
+            </p>
           </li>
         </ul>
       </section>
@@ -246,19 +450,30 @@
             </p>
           </li>
           <li class="card">
-            <h3>AI-powered features</h3>
+            <h3>AI &amp; Claude integrations</h3>
             <p>
-              Streaming chat, LLM matching and retrieval pipelines,
-              evaluations, and ongoing accuracy / latency tuning. Practical
-              AI that ships and stays useful.
+              LLM features inside products — streaming chat, retrieval,
+              matching, evals, and accuracy / latency tuning. Plus MCP
+              servers and Claude / Codex wired into existing surfaces
+              (palettes, launchers, CLI, desktop).
             </p>
           </li>
           <li class="card">
-            <h3>Internal tools &amp; automation</h3>
+            <h3>Desktop apps &amp; native tooling</h3>
             <p>
-              Custom internal systems for hiring, allocation, forecasting,
-              reporting, and process automation — the kind of tools that
-              quietly remove a recurring cost from the rest of the team.
+              Windows desktop applications and small native utilities — from
+              full-feature apps (audio capture, transcription, local-first
+              storage) to PowerToys / CmdPal extensions and AutoHotkey
+              automation.
+            </p>
+          </li>
+          <li class="card">
+            <h3>Browser &amp; editor extensions</h3>
+            <p>
+              Chrome and Firefox browser extensions, VS Code and Visual
+              Studio editor extensions, and Flow Launcher / PowerToys
+              plugins — the kind that quietly add a feature you wish your
+              tool already had.
             </p>
           </li>
           <li class="card">
@@ -270,10 +485,18 @@
             </p>
           </li>
           <li class="card">
-            <h3>Developer tooling</h3>
+            <h3>Internal tools &amp; automation</h3>
             <p>
-              Internal CLIs, build pipelines, and DX upgrades that pay back
-              every sprint thereafter.
+              Custom internal systems for hiring, allocation, forecasting,
+              reporting, and process automation — the kind of tools that
+              quietly remove a recurring cost from the rest of the team.
+            </p>
+          </li>
+          <li class="card">
+            <h3>Developer tooling &amp; libraries</h3>
+            <p>
+              Internal CLIs, build pipelines, DX upgrades, and published
+              npm packages that pay back every sprint thereafter.
             </p>
           </li>
           <li class="card">
