@@ -168,7 +168,12 @@ h3 { font-size: 1.125rem; font-weight: 700; }
 
 .lede { font-size: 1.125rem; color: var(--fg-muted); max-width: 60ch; }
 .lede strong { color: var(--fg); font-weight: 600; }
-.lede a { color: var(--accent-fg); }
+.lede a {
+  color: var(--accent-fg);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
 
 .eyebrow {
   display: inline-block;
@@ -564,6 +569,12 @@ h3 { font-size: 1.125rem; font-weight: 700; }
 .card h3, .steps > li h3 { margin-top: 0; }
 .card p, .steps > li p { color: var(--fg-muted); margin: 0; }
 .card p + p { margin-top: 0.75rem; }
+.card p a, .steps > li p a {
+  color: var(--accent-fg);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
 .card h3 a { color: inherit; }
 .card h3 a:hover { color: var(--accent-fg); text-decoration: none; }
 
