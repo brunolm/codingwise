@@ -23,6 +23,42 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
   });
 });
 
+// Mobile nav toggle — opens/closes the drawer, syncs aria-expanded, and closes
+// on link click or Escape so keyboard users aren't stuck inside the panel.
+{
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.getElementById("primary-nav");
+  if (toggle && nav) {
+    const setOpen = (open) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      nav.classList.toggle("is-open", open);
+    };
+
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    nav.addEventListener("click", (e) => {
+      if (e.target instanceof HTMLAnchorElement) setOpen(false);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener("pointerdown", (e) => {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+      const t = e.target;
+      if (t instanceof Node && (nav.contains(t) || toggle.contains(t))) return;
+      setOpen(false);
+    });
+  }
+}
+
 // Theme toggle — cycles auto → light → dark → auto, persists choice in
 // localStorage, and updates the button's aria-label. The active icon is
 // driven by CSS [data-theme] selectors, so we just have to flip the

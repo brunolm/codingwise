@@ -247,11 +247,114 @@ h3 { font-size: 1.125rem; font-weight: 700; }
 :root[data-theme="dark"] .about-icon-dark { display: block; }
 :root[data-theme="dark"] .about-icon-light { display: none; }
 
-.site-nav { display: flex; gap: clamp(0.75rem, 2vw, 1.5rem); }
+.site-nav { display: flex; align-items: center; gap: clamp(0.75rem, 2vw, 1.5rem); }
 .site-nav a {
   color: var(--fg);
   font-weight: 500;
   padding: 0.25rem 0.25rem;
+}
+
+/* Hamburger — only shown on narrow viewports. Sits between the nav and the
+   theme toggle in source order so tab order stays predictable. */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  place-items: center;
+  cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease,
+    background-color 150ms ease;
+}
+.nav-toggle:hover {
+  border-color: var(--accent-fg);
+  color: var(--accent-fg);
+}
+.nav-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+.nav-icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] .nav-icon-open { display: none; }
+.nav-toggle[aria-expanded="true"] .nav-icon-close { display: block; }
+
+@media (max-width: 720px) {
+  .nav-toggle { display: inline-grid; }
+
+  /* Frosted glass — heavier tint than the header because the drawer can
+     float over any section, not just the top of the page, so links need
+     to stay legible over hero text and dense content alike. */
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem var(--space) 1.25rem;
+    background: color-mix(in oklab, var(--bg) 94%, transparent);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 24px 40px -24px rgba(0, 0, 0, 0.55);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    backdrop-filter: saturate(180%) blur(16px);
+    transform: translateY(-6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 180ms ease, opacity 180ms ease,
+      visibility 0s linear 180ms;
+  }
+  /* Fallback when backdrop-filter isn't supported — go fully opaque. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .site-nav {
+      background: var(--bg);
+    }
+  }
+  .site-nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    transition: transform 180ms ease, opacity 180ms ease,
+      visibility 0s linear 0s;
+  }
+  .site-nav a {
+    padding: 0.85rem 0.25rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--fg) 10%, transparent);
+    font-size: 1.05rem;
+  }
+
+  /* Theme toggle becomes a regular drawer row on mobile — icon + label sit
+     side by side on one row, same hit area and divider as the nav links. */
+  .site-nav .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    align-self: stretch;
+    justify-content: flex-start;
+    gap: 0.6rem;
+    width: 100%;
+    margin: 0;
+    padding: 0.85rem 0.25rem;
+    border: 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--fg) 10%, transparent);
+    border-radius: 0;
+    height: auto;
+    font: inherit;
+    font-size: 1.05rem;
+    color: var(--fg);
+  }
+  .site-nav .theme-toggle:hover {
+    border-color: color-mix(in oklab, var(--fg) 10%, transparent);
+    color: var(--accent-fg);
+  }
+  /* Reveal the label that matches the active theme state. */
+  :root:not([data-theme]) .site-nav .theme-label-auto,
+  :root[data-theme="light"] .site-nav .theme-label-light,
+  :root[data-theme="dark"] .site-nav .theme-label-dark {
+    display: inline;
+  }
 }
 
 /* Theme toggle — cycles auto → light → dark → auto. The active icon is
@@ -280,6 +383,8 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   height: 1.05rem;
   display: none;
 }
+/* Labels are revealed only inside the mobile drawer (see @media below). */
+.theme-label { display: none; }
 :root:not([data-theme]) .theme-icon-auto { display: block; }
 :root[data-theme="light"] .theme-icon-light { display: block; }
 :root[data-theme="dark"] .theme-icon-dark { display: block; }
@@ -309,6 +414,9 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   margin-top: 1.5rem;
   flex-wrap: wrap;
 }
+@media (max-width: 720px) {
+  .cta-row { justify-content: center; }
+}
 
 .btn {
   display: inline-flex;
@@ -331,6 +439,55 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   box-shadow: var(--shadow);
 }
 .btn-primary:hover { background: var(--brand-700); text-decoration: none; }
+
+/* Animated CTA — the hero "Start a project" button gets a glow pulse and a
+   shimmer sweep to draw the eye. Intentionally runs even when the user
+   prefers reduced motion, per product decision. */
+.hero .btn-primary {
+  position: relative;
+  overflow: hidden;
+  animation: cta-pulse 2.4s ease-in-out infinite;
+}
+.hero .btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  animation: cta-shimmer 3.2s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+@keyframes cta-pulse {
+  0%, 100% {
+    box-shadow:
+      var(--shadow),
+      0 0 0 0 color-mix(in oklab, var(--brand-300) 45%, transparent);
+  }
+  50% {
+    box-shadow:
+      var(--shadow),
+      0 0 0 6px color-mix(in oklab, var(--brand-300) 0%, transparent);
+  }
+}
+@keyframes cta-shimmer {
+  0%   { transform: translateX(-120%); }
+  55%  { transform: translateX(120%); }
+  100% { transform: translateX(120%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .btn-primary {
+    animation: cta-pulse 2.4s ease-in-out infinite !important;
+  }
+  .hero .btn-primary::before {
+    animation: cta-shimmer 3.2s ease-in-out infinite !important;
+  }
+}
 
 .btn-ghost {
   background: transparent;
