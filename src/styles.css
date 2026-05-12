@@ -6,10 +6,22 @@
      #93C5FD  light blue accent
 ---------------------------------------------------------------------------- */
 :root {
+  /* Brand + sizing tokens — mode-invariant */
   --brand-600: #2563eb;
   --brand-700: #1e40af;
   --brand-300: #93c5fd;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --container: 1120px;
+  --space: clamp(1rem, 1.5vw, 1.5rem);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
+  /* Color tokens — dark mode defaults. The theme system overrides these in
+     three ways: prefers-color-scheme media query for OS auto, [data-theme]
+     attribute for explicit user override. Dark wins when [data-theme="dark"]
+     is set even if the OS prefers light. */
   --bg: #0b1020;
   --bg-elev: #11173a;
   --bg-alt: #0e1430;
@@ -17,20 +29,17 @@
   --fg-muted: #a8b0d6;
   --border: #1f2748;
   --code-bg: #060a1c;
+  --accent-fg: var(--brand-300);
+  --c-k-color: #c4b5fd;
+  --card-new-bg: #fbbf24;
+  --card-new-fg: #0b1020;
+  --card-featured-bg: var(--brand-300);
+  --card-featured-fg: #0b1020;
   --shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.45);
-
-  --radius: 14px;
-  --radius-sm: 10px;
-  --container: 1120px;
-  --space: clamp(1rem, 1.5vw, 1.5rem);
-
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme="dark"]) {
     --bg: #ffffff;
     --bg-elev: #f6f8ff;
     --bg-alt: #f0f4ff;
@@ -38,8 +47,31 @@
     --fg-muted: #4b5377;
     --border: #dfe5ff;
     --code-bg: #f3f5ff;
+    --accent-fg: var(--brand-700);
+    --c-k-color: #6d28d9;
+    --card-new-bg: #a16207;
+    --card-new-fg: #ffffff;
+    --card-featured-bg: var(--brand-700);
+    --card-featured-fg: #ffffff;
     --shadow: 0 10px 30px -12px rgba(30, 64, 175, 0.25);
   }
+}
+
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-elev: #f6f8ff;
+  --bg-alt: #f0f4ff;
+  --fg: #0b1020;
+  --fg-muted: #4b5377;
+  --border: #dfe5ff;
+  --code-bg: #f3f5ff;
+  --accent-fg: var(--brand-700);
+  --c-k-color: #6d28d9;
+  --card-new-bg: #a16207;
+  --card-new-fg: #ffffff;
+  --card-featured-bg: var(--brand-700);
+  --card-featured-fg: #ffffff;
+  --shadow: 0 10px 30px -12px rgba(30, 64, 175, 0.25);
 }
 
 /* ----------------------------------------------------------------------------
@@ -115,8 +147,14 @@ button:focus-visible {
 }
 
 .section-alt {
-  background: var(--bg-alt);
+  position: relative;
+  background:
+    radial-gradient(85% 55% at 50% 0%,
+      color-mix(in oklab, var(--brand-600) 14%, transparent),
+      transparent 65%),
+    var(--bg-alt);
   border-block: 1px solid var(--border);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--brand-300) 18%, transparent);
 }
 
 h1, h2, h3 {
@@ -130,10 +168,7 @@ h3 { font-size: 1.125rem; font-weight: 700; }
 
 .lede { font-size: 1.125rem; color: var(--fg-muted); max-width: 60ch; }
 .lede strong { color: var(--fg); font-weight: 600; }
-.lede a { color: var(--brand-300); }
-@media (prefers-color-scheme: light) {
-  .lede a { color: var(--brand-700); }
-}
+.lede a { color: var(--accent-fg); }
 
 .eyebrow {
   display: inline-block;
@@ -145,17 +180,11 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--brand-300);
+  color: var(--accent-fg);
   background: color-mix(in oklab, var(--brand-600) 8%, transparent);
 }
-@media (prefers-color-scheme: light) {
-  .eyebrow { color: var(--brand-700); }
-}
 
-.accent { color: var(--brand-300); }
-@media (prefers-color-scheme: light) {
-  .accent { color: var(--brand-700); }
-}
+.accent { color: var(--accent-fg); }
 
 /* ----------------------------------------------------------------------------
    Header / nav
@@ -180,9 +209,43 @@ h3 { font-size: 1.125rem; font-weight: 700; }
 .brand-logo { height: 40px; width: auto; }
 .brand-logo-light { display: none; }
 @media (prefers-color-scheme: light) {
-  .brand-logo-dark { display: none; }
-  .brand-logo-light { display: block; }
+  :root:not([data-theme="dark"]) .brand-logo-dark { display: none; }
+  :root:not([data-theme="dark"]) .brand-logo-light { display: block; }
 }
+:root[data-theme="light"] .brand-logo-dark { display: none; }
+:root[data-theme="light"] .brand-logo-light { display: block; }
+:root[data-theme="dark"] .brand-logo-dark { display: block; }
+:root[data-theme="dark"] .brand-logo-light { display: none; }
+
+/* About — text + icon */
+.about-grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .about-grid { grid-template-columns: 1.1fr 0.9fr; }
+}
+.about-art {
+  display: grid;
+  place-items: center;
+}
+.about-icon {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  opacity: 0.92;
+}
+.about-icon-light { display: none; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .about-icon-dark { display: none; }
+  :root:not([data-theme="dark"]) .about-icon-light { display: block; }
+}
+:root[data-theme="light"] .about-icon-dark { display: none; }
+:root[data-theme="light"] .about-icon-light { display: block; }
+:root[data-theme="dark"] .about-icon-dark { display: block; }
+:root[data-theme="dark"] .about-icon-light { display: none; }
 
 .site-nav { display: flex; gap: clamp(0.75rem, 2vw, 1.5rem); }
 .site-nav a {
@@ -190,10 +253,37 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   font-weight: 500;
   padding: 0.25rem 0.25rem;
 }
-.site-nav a:hover { color: var(--brand-300); text-decoration: none; }
-@media (prefers-color-scheme: light) {
-  .site-nav a:hover { color: var(--brand-700); }
+
+/* Theme toggle — cycles auto → light → dark → auto. The active icon is
+   chosen via [data-theme] selectors so it stays in sync with the actual
+   applied theme without JS having to swap classes. */
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  margin-left: 0.25rem;
+  transition: border-color 150ms ease, color 150ms ease,
+    background-color 150ms ease;
 }
+.theme-toggle:hover {
+  border-color: var(--accent-fg);
+  color: var(--accent-fg);
+}
+.theme-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+  display: none;
+}
+:root:not([data-theme]) .theme-icon-auto { display: block; }
+:root[data-theme="light"] .theme-icon-light { display: block; }
+:root[data-theme="dark"] .theme-icon-dark { display: block; }
+.site-nav a:hover { color: var(--accent-fg); text-decoration: none; }
 
 /* ----------------------------------------------------------------------------
    Hero
@@ -248,12 +338,9 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   border-color: var(--border);
 }
 .btn-ghost:hover {
-  border-color: var(--brand-300);
-  color: var(--brand-300);
+  border-color: var(--accent-fg);
+  color: var(--accent-fg);
   text-decoration: none;
-}
-@media (prefers-color-scheme: light) {
-  .btn-ghost:hover { color: var(--brand-700); border-color: var(--brand-700); }
 }
 
 /* Hero art */
@@ -286,12 +373,8 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   overflow: auto;
   box-shadow: var(--shadow);
 }
-.c-k  { color: #c4b5fd; }
-.c-fn { color: var(--brand-300); }
-@media (prefers-color-scheme: light) {
-  .c-k  { color: #6d28d9; }
-  .c-fn { color: var(--brand-700); }
-}
+.c-k  { color: var(--c-k-color); }
+.c-fn { color: var(--accent-fg); }
 
 /* ----------------------------------------------------------------------------
    Cards / steps
@@ -310,26 +393,30 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.25rem 1.25rem 1.1rem;
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--accent-fg, var(--brand-300)) 35%, var(--border));
+  box-shadow: 0 8px 24px -16px color-mix(in oklab, var(--brand-600) 50%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .card:hover { transform: none; }
 }
 .card h3, .steps > li h3 { margin-top: 0; }
 .card p, .steps > li p { color: var(--fg-muted); margin: 0; }
 .card p + p { margin-top: 0.75rem; }
 .card h3 a { color: inherit; }
-.card h3 a:hover { color: var(--brand-300); text-decoration: none; }
-@media (prefers-color-scheme: light) {
-  .card h3 a:hover { color: var(--brand-700); }
-}
+.card h3 a:hover { color: var(--accent-fg); text-decoration: none; }
 
 .card-meta {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--brand-300) !important;
+  color: var(--accent-fg) !important;
   margin: 0 0 0.4rem !important;
-}
-@media (prefers-color-scheme: light) {
-  .card-meta { color: var(--brand-700) !important; }
 }
 
 .card-stack {
@@ -346,6 +433,53 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+/* Compact card grid — used by the Side projects section so all ~20 cards
+   fit without dominating the page. Smaller min-width, tighter padding,
+   denser type. Card-wide / card-featured / card-new still work as-is. */
+.cards-compact {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+.cards-compact .card {
+  padding: 0.9rem 1rem 0.85rem;
+}
+.cards-compact .card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+.cards-compact .card p {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.cards-compact .card p + p {
+  margin-top: 0.55rem;
+}
+
+/* Scroll-reveal — fade + slight upward translate when section cards / headings
+   enter the viewport. Gated behind .js so non-JS users see content immediately,
+   and overridden by prefers-reduced-motion. The hero is intentionally excluded
+   so above-the-fold content paints instantly. */
+.js .section .card,
+.js .section > h2 {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms ease, transform 600ms ease;
+  will-change: opacity, transform;
+}
+.js .section .card.is-visible,
+.js .section > h2.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .section .card,
+  .js .section > h2 {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* A card with a denser body — span 2 columns on wider grids so the inner
    list doesn't get cramped into a narrow rail. */
 .card-wide { grid-column: span 1; }
@@ -356,16 +490,16 @@ h3 { font-size: 1.125rem; font-weight: 700; }
 /* "New" badge — same shape as featured/pending, in a yellow palette. */
 .card-new {
   position: relative;
-  border-color: #fbbf24;
-  box-shadow: 0 0 0 1px rgba(251, 191, 36, 0.25);
+  border-color: var(--card-new-bg);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--card-new-bg) 25%, transparent);
 }
 .card-new::before {
   content: "New";
   position: absolute;
   top: -0.55rem;
   right: 0.75rem;
-  background: #fbbf24;
-  color: #0b1020;
+  background: var(--card-new-bg);
+  color: var(--card-new-fg);
   font-family: var(--font-mono);
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -373,32 +507,22 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   padding: 0.15rem 0.5rem;
   border-radius: 0.25rem;
   line-height: 1.2;
-}
-@media (prefers-color-scheme: light) {
-  .card-new {
-    border-color: #a16207;
-    box-shadow: 0 0 0 1px rgba(161, 98, 7, 0.2);
-  }
-  .card-new::before {
-    background: #a16207;
-    color: #fff;
-  }
 }
 
 /* A highlighted/featured card — brand-colored border + corner badge,
    structurally identical to .card-pending but in the brand palette. */
 .card-featured {
   position: relative;
-  border-color: var(--brand-300);
-  box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-300) 25%, transparent);
+  border-color: var(--card-featured-bg);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--card-featured-bg) 25%, transparent);
 }
 .card-featured::before {
   content: "Featured";
   position: absolute;
   top: -0.55rem;
   right: 0.75rem;
-  background: var(--brand-300);
-  color: #0b1020;
+  background: var(--card-featured-bg);
+  color: var(--card-featured-fg);
   font-family: var(--font-mono);
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -406,16 +530,6 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   padding: 0.15rem 0.5rem;
   border-radius: 0.25rem;
   line-height: 1.2;
-}
-@media (prefers-color-scheme: light) {
-  .card-featured {
-    border-color: var(--brand-700);
-    box-shadow: 0 0 0 1px color-mix(in oklab, var(--brand-700) 20%, transparent);
-  }
-  .card-featured::before {
-    background: var(--brand-700);
-    color: #fff;
-  }
 }
 
 .card-section-label {
@@ -446,11 +560,8 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   position: absolute;
   left: 0;
   top: 0;
-  color: var(--brand-300);
+  color: var(--accent-fg);
   font-weight: 700;
-}
-@media (prefers-color-scheme: light) {
-  .card-list > li::before { color: var(--brand-700); }
 }
 .card-list strong {
   color: var(--fg);
@@ -485,16 +596,13 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--brand-300);
+  color: var(--accent-fg);
   border: 1px solid var(--border);
   border-radius: 999px;
   width: 1.6rem;
   height: 1.6rem;
   display: grid;
   place-items: center;
-}
-@media (prefers-color-scheme: light) {
-  .steps > li::before { color: var(--brand-700); }
 }
 
 .contact-line { margin-top: 1.5rem; }

@@ -16,6 +16,17 @@
     <link rel="icon" type="image/svg+xml" href="./assets/icon-dark.svg" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/svg+xml" href="./assets/icon-light.svg" media="(prefers-color-scheme: light)" />
     <link rel="canonical" href="https://codingwise.com/" />
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+        document.documentElement.classList.add('js');
+      })();
+    </script>
     <link rel="stylesheet" href="./styles.css" />
     <title>CodingWise — Less code. More wisdom.</title>
   </head>
@@ -34,6 +45,19 @@
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
         </nav>
+        <button class="theme-toggle" type="button" aria-label="Theme">
+          <svg class="theme-icon theme-icon-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="13" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+          </svg>
+          <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -176,7 +200,7 @@
 
       <section id="side-projects" class="section" aria-labelledby="side-projects-title">
         <h2 id="side-projects-title">Side projects</h2>
-        <ul class="cards cards-work" role="list">
+        <ul class="cards cards-compact" role="list">
           <li class="card card-new">
             <h3>
               <a href="https://hibikicodex.com/" rel="noopener noreferrer" target="_blank">Hibiki Codex ↗</a>
@@ -510,17 +534,25 @@
       </section>
 
       <section id="about" class="section" aria-labelledby="about-title">
-        <h2 id="about-title">About</h2>
-        <p class="lede">
-          CodingWise is a one-person guild. The work above was designed,
-          built, and shipped by <a href="https://github.com/brunolm" rel="noopener noreferrer" target="_blank">Bruno Leonardo Michels</a> —
-          end to end, from architecture through deploy.
-        </p>
-        <p class="lede">
-          The bar: code that's easy to change six months from now, tests that
-          catch real bugs, and software that respects the people who use it.
-          That's the whole pitch.
-        </p>
+        <div class="about-grid">
+          <div class="about-copy">
+            <h2 id="about-title">About</h2>
+            <p class="lede">
+              CodingWise is a one-person guild. The work above was designed,
+              built, and shipped by <a href="https://github.com/brunolm" rel="noopener noreferrer" target="_blank">Bruno Leonardo Michels</a> —
+              end to end, from architecture through deploy.
+            </p>
+            <p class="lede">
+              The bar: code that's easy to change six months from now, tests that
+              catch real bugs, and software that respects the people who use it.
+              That's the whole pitch.
+            </p>
+          </div>
+          <div class="about-art" aria-hidden="true">
+            <img class="about-icon about-icon-dark" src="./assets/icon-dark.svg" alt="" width="240" height="240" />
+            <img class="about-icon about-icon-light" src="./assets/icon-light.svg" alt="" width="240" height="240" />
+          </div>
+        </div>
       </section>
 
       <section id="contact" class="section section-alt" aria-labelledby="contact-title">
