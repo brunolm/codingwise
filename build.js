@@ -13,7 +13,7 @@
  * `bun run build` produces ./dist/.
  * `bun run dev`   serves ./src/ with bun's dev server.
  */
-import { rmSync, mkdirSync, cpSync, existsSync, readdirSync, statSync } from "node:fs";
+import { rmSync, mkdirSync, cpSync, existsSync, readdirSync, statSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 
 const ROOT = import.meta.dir;
@@ -66,6 +66,24 @@ if (isServe) {
     for (const log of result.logs) console.error(log);
     process.exit(1);
   }
+
+  // Defer the bundled CSS so it doesn't block initial render.
+  // Pattern: load via preload + onload swap, with a <noscript> fallback.
+  const htmlPath = join(OUT, "index.html");
+  let html = readFileSync(htmlPath, "utf8");
+  const linkRe = /<link\s+rel="stylesheet"([^>]*?)href="(\.\/assets\/[^"]+\.css)"([^>]*?)>/;
+  html = html.replace(
+    linkRe,
+    (_m, pre, href, post) => {
+      const attrs = `${pre}${post}`.trim();
+      const extra = attrs ? ` ${attrs}` : "";
+      return (
+        `<link rel="preload" as="style" href="${href}"${extra} onload="this.onload=null;this.rel='stylesheet'">` +
+        `<noscript><link rel="stylesheet" href="${href}"${extra}></noscript>`
+      );
+    },
+  );
+  writeFileSync(htmlPath, html);
 
   // Mirror public/ (CNAME, .nojekyll, robots.txt, sitemap.xml) into dist/.
   if (existsSync(PUBLIC)) {
