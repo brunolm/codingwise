@@ -67,13 +67,39 @@ if (isServe) {
     process.exit(1);
   }
 
-  // Defer the bundled CSS so it doesn't block initial render.
-  // Pattern: load via preload + onload swap, with a <noscript> fallback.
+  // CSS strategy: inline the small critical stylesheet so the header + hero
+  // paint without layout shift, and defer the full stylesheet via preload +
+  // onload swap so it doesn't block first paint.
   const htmlPath = join(OUT, "index.html");
   let html = readFileSync(htmlPath, "utf8");
-  const linkRe = /<link\s+rel="stylesheet"([^>]*?)href="(\.\/assets\/[^"]+\.css)"([^>]*?)>/;
+
+  // 1) Build src/critical.css standalone (Bun's HTML bundler would otherwise
+  //    merge it into the main CSS chunk), then inline it where the
+  //    <!-- critical-css --> placeholder sits in the source HTML.
+  const criticalSrc = join(SRC, "critical.css");
+  if (existsSync(criticalSrc)) {
+    const tmpDir = join(OUT, "__critical_tmp");
+    mkdirSync(tmpDir, { recursive: true });
+    const criticalResult = await Bun.build({
+      entrypoints: [criticalSrc],
+      outdir: tmpDir,
+      minify: true,
+      target: "browser",
+    });
+    if (!criticalResult.success) {
+      for (const log of criticalResult.logs) console.error(log);
+      process.exit(1);
+    }
+    const builtCss = criticalResult.outputs.find((o) => o.path.endsWith(".css"));
+    const css = await Bun.file(builtCss.path).text();
+    html = html.replace(/<!--\s*critical-css\s*-->/, `<style>${css}</style>`);
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+
+  // 2) Defer the main stylesheet via preload + onload swap.
+  const deferRe = /<link\s+rel="stylesheet"([^>]*?)href="(\.\/assets\/[^"]+\.css)"([^>]*?)>/g;
   html = html.replace(
-    linkRe,
+    deferRe,
     (_m, pre, href, post) => {
       const attrs = `${pre}${post}`.trim();
       const extra = attrs ? ` ${attrs}` : "";
