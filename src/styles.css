@@ -346,6 +346,64 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+/* A card with a denser body — span 2 columns on wider grids so the inner
+   list doesn't get cramped into a narrow rail. */
+.card-wide { grid-column: span 1; }
+@media (min-width: 700px) {
+  .card-wide { grid-column: span 2; }
+}
+
+.card-section-label {
+  margin: 1rem 0 0.4rem !important;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+}
+
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+.card-list > li {
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  padding-left: 1.1rem;
+  position: relative;
+}
+.card-list > li::before {
+  content: "›";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--brand-300);
+  font-weight: 700;
+}
+@media (prefers-color-scheme: light) {
+  .card-list > li::before { color: var(--brand-700); }
+}
+.card-list strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+.card-list-meta {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  color: var(--fg-muted);
+  vertical-align: middle;
+}
+
 .steps {
   counter-reset: step;
 }
