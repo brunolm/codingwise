@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+bun.lock
+bun.lockb
+
+# Build output
+dist/
+.cache/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+bun-debug.log*
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Local-only overrides (anything matching *.local.* is never committed)
+*.local.*

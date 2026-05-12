@@ -1,0 +1,15 @@
+{
+  "name": "codingwise-site",
+  "private": true,
+  "version": "0.1.0",
+  "description": "CodingWise company website — static, zero-dependency, deployed to GitHub Pages.",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run build.js --serve",
+    "build": "bun run build.js",
+    "clean": "bun run -e \"import { rmSync } from 'node:fs'; rmSync('dist', { recursive: true, force: true })\""
+  },
+  "engines": {
+    "bun": ">=1.3.0"
+  }
+}

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="description" content="CodingWise — a solo software guild led by Bruno Leonardo Michels. Less code. More wisdom." />
+    <meta property="og:title" content="CodingWise — Less code. More wisdom." />
+    <meta property="og:description" content="A solo software guild led by Bruno Leonardo Michels. Full-stack product work, AI-powered tools, and pragmatic engineering." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://codingwise.com/" />
+    <meta property="og:image" content="https://codingwise.com/assets/linkedin-banner.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="./assets/icon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="./assets/icon-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="canonical" href="https://codingwise.com/" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>CodingWise — Less code. More wisdom.</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" role="banner">
+      <a class="brand" href="#" aria-label="CodingWise home">
+        <img class="brand-logo brand-logo-dark" src="./assets/logo-horizontal-dark.svg" alt="CodingWise" width="240" height="60" />
+        <img class="brand-logo brand-logo-light" src="./assets/logo-horizontal-light.svg" alt="CodingWise" width="240" height="60" />
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">A solo software guild</p>
+            <h1 id="hero-title">
+              Less code. <span class="accent">More wisdom.</span>
+            </h1>
+            <p class="lede">
+              CodingWise is the practice of <strong>Bruno Leonardo Michels</strong> —
+              a one-person studio shipping full-stack products, AI-powered tools,
+              and developer infrastructure that's built to last.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#contact">Start a project</a>
+              <a class="btn btn-ghost" href="#work">See the work</a>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="glow"></div>
+            <pre class="code-card"><code><span class="c-k">function</span> <span class="c-fn">ship</span>(idea) {
+  <span class="c-k">while</span> (!idea.done) {
+    idea = <span class="c-fn">simplify</span>(idea);
+    idea = <span class="c-fn">test</span>(idea);
+    idea = <span class="c-fn">review</span>(idea);
+  }
+  <span class="c-k">return</span> idea;
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" class="section" aria-labelledby="work-title">
+        <h2 id="work-title">Selected work</h2>
+        <ul class="cards cards-work" role="list">
+          <li class="card">
+            <p class="card-meta">2026 — present</p>
+            <h3>Privacy tool</h3>
+            <p>
+              An in-development product focused on user privacy. More to share
+              as it gets closer to launch.
+            </p>
+          </li>
+          <li class="card">
+            <p class="card-meta">2025 – 2026</p>
+            <h3>Talent-matching platform</h3>
+            <p>
+              Full-stack Next.js app for recruiters to browse, filter, and
+              evaluate candidates against open roles. Designed the matching
+              pipeline — heuristic filters followed by LLM-based comparison
+              of experience against requirements — with continuous tuning
+              for accuracy and latency.
+            </p>
+            <p class="card-stack">
+              Next.js · TypeScript · PostgreSQL · Supabase · Airtable ·
+              AWS (S3, IAM, Step Functions, Lambda, CodeBuild) · Vercel
+            </p>
+          </li>
+          <li class="card">
+            <p class="card-meta">2024 – 2025</p>
+            <h3>AI character chat platform</h3>
+            <p>
+              Next.js product where users converse with persona-driven AI
+              characters authored by industry professionals. Built streaming
+              chat completions, a relationship and leveling system unlocking
+              conversations / cosmetics / memories, a quest engine for
+              action-based rewards, and an in-platform store. Shaped the
+              overall architecture for scale.
+            </p>
+            <p class="card-stack">
+              Next.js · Prisma · Supabase (Auth/DB/RLS/Realtime) ·
+              KeywordsAI · Trigger.dev · Docker
+            </p>
+          </li>
+          <li class="card">
+            <p class="card-meta">2024 – 2025</p>
+            <h3>Collaborative editor</h3>
+            <p>
+              A Google-Docs-style editor for a SoundCloud-adjacent product —
+              inline comments, real-time multi-user sync, avatar selection,
+              AI bots that reply to content and comments, and a Novu-powered
+              notification system.
+            </p>
+          </li>
+          <li class="card">
+            <p class="card-meta">Recent — side project</p>
+            <h3>
+              <a href="https://hibikicodex.com/" rel="noopener noreferrer" target="_blank">Hibiki Codex ↗</a>
+            </h3>
+            <p>
+              Windows desktop app that captures system audio, transcribes
+              locally with whisper.cpp, and lets you query Claude or Codex
+              about what was just said.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="services" class="section section-alt" aria-labelledby="services-title">
+        <h2 id="services-title">What I do</h2>
+        <ul class="cards" role="list">
+          <li class="card">
+            <h3>Product engineering</h3>
+            <p>
+              Web apps and APIs from prototype to production. TypeScript,
+              Next.js, Node, .NET — whatever fits the job.
+            </p>
+          </li>
+          <li class="card">
+            <h3>AI-powered features</h3>
+            <p>
+              Streaming chat, retrieval, LLM pipelines, evaluations.
+              Practical AI that ships and stays accurate.
+            </p>
+          </li>
+          <li class="card">
+            <h3>Developer tooling</h3>
+            <p>
+              Internal CLIs, build pipelines, and DX upgrades that pay back
+              every sprint thereafter.
+            </p>
+          </li>
+          <li class="card">
+            <h3>Code review &amp; consulting</h3>
+            <p>
+              Independent second opinions on architecture, security, and
+              maintainability — without the agency overhead.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="about" class="section" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <p class="lede">
+          CodingWise is a one-person guild. The work above was designed,
+          built, and shipped by <a href="https://github.com/brunolm" rel="noopener noreferrer" target="_blank">Bruno Leonardo Michels</a> —
+          end to end, from architecture through deploy.
+        </p>
+        <p class="lede">
+          The bar: code that's easy to change six months from now, tests that
+          catch real bugs, and software that respects the people who use it.
+          That's the whole pitch.
+        </p>
+      </section>
+
+      <section id="contact" class="section section-alt" aria-labelledby="contact-title">
+        <h2 id="contact-title">Let's talk</h2>
+        <p class="lede">
+          Have a problem worth solving? Send a note and I'll get back to you.
+        </p>
+        <p class="contact-line">
+          <a class="btn btn-primary" href="mailto:hello@codingwise.com">hello@codingwise.com</a>
+          <a class="btn btn-ghost" href="https://github.com/brunolm" rel="noopener noreferrer" target="_blank">GitHub ↗</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <p>&copy; <span id="year">2026</span> CodingWise · Bruno Leonardo Michels</p>
+    </footer>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
