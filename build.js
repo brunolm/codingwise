@@ -24,24 +24,19 @@ const OUT = resolve(ROOT, "dist");
 const isServe = process.argv.includes("--serve");
 
 if (isServe) {
-  // Dev server: serves HTML entrypoints, hot-reloads on change.
-  // No minification — fast iteration only.
+  // Dev server: serves the HTML entry through Bun's bundler, which injects
+  // the HMR runtime so edits to index.html / main.js / styles.css hot-reload.
+  const index = await import("./src/index.html");
   Bun.serve({
     port: 5173,
     development: { hmr: true },
     routes: {
-      "/": new Response(await Bun.file(join(SRC, "index.html")).bytes(), {
-        headers: { "Content-Type": "text/html; charset=utf-8" },
-      }),
+      "/": index.default,
     },
     async fetch(req) {
+      // Fallback for files in public/ (CNAME, robots.txt, etc.).
       const url = new URL(req.url);
-      const path = url.pathname === "/" ? "/index.html" : url.pathname;
-      const filePath = join(SRC, path);
-      const publicPath = join(PUBLIC, path);
-      if (existsSync(filePath) && statSync(filePath).isFile()) {
-        return new Response(Bun.file(filePath));
-      }
+      const publicPath = join(PUBLIC, url.pathname);
       if (existsSync(publicPath) && statSync(publicPath).isFile()) {
         return new Response(Bun.file(publicPath));
       }
