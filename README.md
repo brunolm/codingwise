@@ -68,49 +68,6 @@ Bun's built-in bundler:
 Total page weight after build is ~20 kB. The `linkedin-banner.png` ships at
 its original size because it's only fetched by social-card scrapers.
 
-## Hosting on GitHub Pages
-
-Deploy is fully automated by `.github/workflows/deploy.yml`. The flow:
-
-1. Push to `main`.
-2. Workflow builds `dist/`, uploads it as a Pages artifact, deploys via
-   `actions/deploy-pages`.
-3. `dist/CNAME` instructs GitHub Pages to serve under `codingwise.com`.
-4. Cloudflare DNS points `codingwise.com` and `www.codingwise.com` at
-   GitHub's Pages servers (DNS-only / unproxied so GitHub's Let's Encrypt
-   cert provisioning works).
-
-### One-time setup on GitHub
-
-In the repo's **Settings → Pages**:
-
-- **Source:** GitHub Actions
-- **Custom domain:** `codingwise.com`
-- **Enforce HTTPS:** on (enable once GitHub finishes provisioning the cert
-  — usually a few minutes after DNS resolves)
-
-### One-time DNS setup
-
-Apex (`codingwise.com`) — four A records, DNS-only (gray cloud):
-
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
-
-`www.codingwise.com` — CNAME to `brunolm.github.io`, DNS-only.
-
-Optional but recommended — AAAA records for IPv6:
-
-```
-2606:50c0:8000::153
-2606:50c0:8001::153
-2606:50c0:8002::153
-2606:50c0:8003::153
-```
-
 ## Supply-chain hardening
 
 - `bunfig.toml` sets `minimumReleaseAge = 259200` (3 days). Any package
