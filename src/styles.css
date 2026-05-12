@@ -101,7 +101,7 @@ button:focus-visible {
   width: 100%;
 }
 
-.site-header > *,
+.site-header-inner,
 .section,
 .site-footer > *,
 .hero-grid {
@@ -168,7 +168,7 @@ h3 { font-size: 1.125rem; font-weight: 700; }
   background: color-mix(in oklab, var(--bg) 80%, transparent);
   border-bottom: 1px solid var(--border);
 }
-.site-header > * {
+.site-header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
