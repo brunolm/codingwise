@@ -96,7 +96,20 @@ if (isServe) {
     rmSync(tmpDir, { recursive: true, force: true });
   }
 
-  // 2) Defer the main stylesheet via preload + onload swap.
+  // 2) Inject favicon links. These point to files in public/ (mirrored to the
+  //    site root), so they bypass Bun's HTML bundler — which would otherwise
+  //    fail to resolve root-relative hrefs from src/.
+  const faviconLinks = [
+    '<link rel="icon" href="/favicon.ico" sizes="any">',
+    '<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">',
+    '<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">',
+    '<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">',
+    '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">',
+    '<link rel="manifest" href="/site.webmanifest">',
+  ].join("\n    ");
+  html = html.replace(/<!--\s*favicons\s*-->/, faviconLinks);
+
+  // 3) Defer the main stylesheet via preload + onload swap.
   const deferRe = /<link\s+rel="stylesheet"([^>]*?)href="(\.\/assets\/[^"]+\.css)"([^>]*?)>/g;
   html = html.replace(
     deferRe,
