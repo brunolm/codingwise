@@ -12,6 +12,8 @@ No frameworks. No npm dependencies. The whole thing compresses to ~20 kB.
 .
 ├── src/                # source HTML, CSS, JS, and bundler-resolved assets
 │   ├── index.html      # entry point — Bun's HTML bundler walks links from here
+│   ├── bootcamp/       # extra page — one folder per route, served at /bootcamp/
+│   │   └── index.html
 │   ├── styles.css
 │   ├── main.js
 │   └── assets/         # logos, etc. — referenced from HTML/CSS, get hashed at build
@@ -54,12 +56,14 @@ browser refresh is enough for a site this small.
 bun run build
 ```
 
-Produces `dist/`. The pipeline is `build.js` (~80 lines, no deps) and uses
-Bun's built-in bundler:
+Produces `dist/`. The pipeline is `build.js` (no deps) and uses Bun's
+built-in bundler. New pages are a folder under `src/` plus an entry in the
+`PAGES` array in `build.js`:
 
 | Input                          | Output                                      |
 | ------------------------------ | ------------------------------------------- |
 | `src/index.html`               | `dist/index.html` (rewritten with hashed asset URLs) |
+| `src/bootcamp/index.html`      | `dist/bootcamp/index.html`                  |
 | `src/main.js`                  | `dist/assets/index-[hash].js` (minified, sourcemapped) |
 | `src/styles.css`               | `dist/assets/index-[hash].css` (minified, sourcemapped) |
 | `src/assets/*.svg` (referenced)| `dist/assets/[name]-[hash].svg`             |
